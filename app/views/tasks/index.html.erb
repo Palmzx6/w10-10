@@ -1,0 +1,24 @@
+<h1>รายการ Todo</h1>
+
+<div>
+  <%= form_with model: @new_task, local: true do |f| %>
+    <div>
+      <%= f.label :name, 'ชื่อ' %>
+      <%= f.text_field :name, required: true %>
+    </div>
+    <div>
+      <%= f.submit 'สร้างงาน' %>
+    </div>
+  <% end %>
+</div>
+
+<h2>งานที่ยังไม่เสร็จ</h2>
+<ul>
+  <% @tasks.each do |task| %>
+    <li>
+      <%= task.name %>
+      <%= link_to 'ทำเครื่องหมายว่างานเสร็จ', complete_task_path(task), method: :patch %>
+      <%= link_to 'ลบ', task_path(task), method: :delete, data: { confirm: 'คุณแน่ใจหรือไม่ที่จะลบงานนี้?' } %>
+    </li>
+  <% end %>
+</ul>
